@@ -23,9 +23,10 @@ public class RandomTorque : MonoBehaviour
     public void ApplyTorque()
     {
         // Multiply a vector with a random torque variable
-        float x = Random.Range(minTorqueStrength, maxTorqueStrength);
-        float y = Random.Range(minTorqueStrength, maxTorqueStrength);
-        float z = Random.Range(minTorqueStrength, maxTorqueStrength);
+        // (Random.Range(0,2) == 0 ? -1 : 1) is 50% chance of being negative
+        float x = (Random.Range(0,2) == 0 ? -1 : 1) * Random.Range(minTorqueStrength, maxTorqueStrength);
+        float y = (Random.Range(0, 2) == 0 ? -1 : 1) * Random.Range(minTorqueStrength, maxTorqueStrength);
+        float z = (Random.Range(0, 2) == 0 ? -1 : 1) * Random.Range(minTorqueStrength, maxTorqueStrength);
         rb.AddTorque(new Vector3(x, y, z), ForceMode.Impulse);
     }
 }

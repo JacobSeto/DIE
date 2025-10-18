@@ -1568,11 +1568,11 @@ PrefabInstance:
       objectReference: {fileID: 2015686981}
     - target: {fileID: 6968650792997741391, guid: 6bdbb34c994bbe84f9fb201dade4c99e, type: 3}
       propertyPath: maxForceStrength
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6968650792997741391, guid: 6bdbb34c994bbe84f9fb201dade4c99e, type: 3}
       propertyPath: minForceStrength
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7315588058372365421, guid: 6bdbb34c994bbe84f9fb201dade4c99e, type: 3}
       propertyPath: diceText
