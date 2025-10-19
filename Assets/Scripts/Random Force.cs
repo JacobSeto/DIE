@@ -25,4 +25,6 @@ public class RandomForce : MonoBehaviour
         // Multiply a vector pointing upwards by a random force strength
         rb.AddForce(Vector3.up * Random.Range(minForceStrength, maxForceStrength), ForceMode.Impulse);
     }
+
+
 }
