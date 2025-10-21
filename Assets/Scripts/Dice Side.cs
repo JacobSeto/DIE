@@ -6,17 +6,39 @@ using UnityEngine;
 /// </summary>
 public class DiceSide : MonoBehaviour
 {
-    // SerializeField allows us to set a value through the Unity Editor
-    [SerializeField] int diceSide;
-    [SerializeField] TMP_Text diceText;
+    [Tooltip("Value of dice side")]
+    [SerializeField] int diceValue;
+    [Tooltip("Dice side properties")]
+    [SerializeField] SideProperties sideProperty;
+    [SerializeField] Dice dice;
 
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] LayerMask groundLayer;
+    [Tooltip("The velocity threshold to be considered no longer moving")]
+    [SerializeField] float reportVelocity;
+    [SerializeField] float checkDistance;
+    Rigidbody rb;
+
+    private void Start()
     {
-        // If the gameobject has the Floor tag
-        if (other.CompareTag("Floor"))
+        rb = GetComponentInParent<Rigidbody>();
+    }
+
+    /// <summary>
+    /// Report the score only when the dice is grounded and no longer considered moving
+    /// </summary>
+    /// <param name="other"></param>
+    private void Update()
+    {
+        if (dice.isRolling && (rb.linearVelocity.magnitude + rb.angularVelocity.magnitude) < reportVelocity)
         {
-            // Set the diceText to the diceSide
-            diceText.text = diceSide.ToString();
+            Debug.Log("Checking");
+            if (Physics.Raycast(transform.position, transform.forward, checkDistance, groundLayer))
+            {
+                DiceManager.Instance.ReportScore(diceValue, sideProperty);
+                dice.isRolling = false;
+            }
         }
     }
+
+
 }
