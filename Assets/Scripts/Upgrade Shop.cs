@@ -22,6 +22,7 @@ public class UpgradeShop : MonoBehaviour
     [SerializeField] Dice doubleCoinPrefab;
     [SerializeField] Dice oddEvenCoinPrefab;
     [SerializeField] Dice onesCoinPrefab;
+    [SerializeField] Dice sillyDiePrefab;
 
     /// <summary>
     /// Randomly chooses a number of upgrades to reveal in the shop
@@ -95,5 +96,13 @@ public class UpgradeShop : MonoBehaviour
     public void AddOnesCoin()
     {
         DiceManager.Instance.AddDice(onesCoinPrefab);
+    }
+
+    /// <summary>
+    /// Adds a silly die coin that could give a reroll
+    /// </summary>
+    public void AddSillyDie()
+    {
+        DiceManager.Instance.AddDice(sillyDiePrefab);
     }
 }

@@ -56,10 +56,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         shop.AddD6();
-        shop.AddCoin();
-        shop.AddDoubleCoin();
-        shop.AddOddEvenCoin();
-        shop.AddOnesCoin();
         SetScore(score);
         StartRound();
     }
