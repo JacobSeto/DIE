@@ -24,12 +24,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text debtText;
     [Tooltip("The amount of debt increase per round")]
     public int debtRoundIncrease;
-    [Tooltip("The amount round debt increases by")]
+    [Tooltip("The amount debtRoundIncrease increases by per round")]
     [SerializeField] int debtBonusIncrease;
+    [Tooltip("The multiplicative scaling of the debtBonusIncrease, rounded to nearest int")]
+    [SerializeField] float debtBonusMultiplier;
     [Tooltip("Interval of rounds before debtBonusIncrease is applied")]
     [SerializeField] int debtBonusIncreaseIntervals;
 
     int bonusDebt = 0;
+    int bonusIncrease = 0;
+    int intervalCounter = 0;
 
     [Tooltip("The round number")]
     [HideInInspector] public int round;
@@ -67,8 +71,14 @@ public class GameManager : MonoBehaviour
         shop.HideShop();
         scoreCounterText.gameObject.SetActive(false);
         round++;
-        bonusDebt = round % debtBonusIncreaseIntervals == 0 ? bonusDebt + debtBonusIncrease : bonusDebt;
-        debt += debtRoundIncrease + bonusDebt;
+        if(round % debtBonusIncreaseIntervals == 0)
+        {
+            bonusIncrease = Mathf.RoundToInt(debtBonusIncrease * (debtBonusMultiplier * intervalCounter));
+            intervalCounter++;
+            bonusDebt += bonusIncrease;
+        }
+        debtRoundIncrease += bonusDebt;
+        debt += debtRoundIncrease;
 
         rollsLeft = numRolls;
         SetDebt(debt);
@@ -156,6 +166,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void ChangeTimeScale(float timeScale)
+    {
+        Time.timeScale = timeScale;
+    }
 
 
 }
