@@ -45,11 +45,21 @@ public class DiceManager : MonoBehaviour
         newDice.transform.SetParent(diceContainer);
         diceList.Add(newDice);
     }
+
+    public void OnRoll()
+    {
+        RollDice();
+    }
+
     /// <summary>
     /// Rolls all dice
     /// </summary>
     public void RollDice()
     {
+        if (isRolling)
+        {
+            return;
+        }
         isRolling = true;
         GameManager.Instance.SetRollButton(false);
         diceCount = 0;

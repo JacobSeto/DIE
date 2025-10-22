@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("The player score")]
     public int score;
-    [Space]
+    [Space(200)]
     [SerializeField] TMP_Text scoreText;
 
     [Tooltip("Counts up the score added from that round")]
@@ -145,8 +145,8 @@ public class GameManager : MonoBehaviour
     void LoseGame()
     {
         loseScreen.SetActive(true);
+        PlayerPrefs.SetInt("Highest Round", Mathf.Max(PlayerPrefs.GetInt("Highest Round", 0), round));
         int highestRound = PlayerPrefs.GetInt("Highest Round", 0);
-        PlayerPrefs.SetInt("Highest Round", Mathf.Max(highestRound, round));
         loseStats.text = "Highest Round: " + highestRound.ToString();
     }
     /// <summary>

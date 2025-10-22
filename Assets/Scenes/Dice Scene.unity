@@ -4129,7 +4129,7 @@ PrefabInstance:
         Heads: Double all previous rolls
 
         Tails:
-        0'
+        -2'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
