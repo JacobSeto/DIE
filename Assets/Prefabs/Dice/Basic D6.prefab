@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Name
-      value: Dice Side (2)
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Layer
@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.y
@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: diceValue
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: checkDistance
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -100,7 +104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Name
-      value: Dice Side (4)
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Layer
@@ -112,7 +116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -154,6 +158,10 @@ PrefabInstance:
       propertyPath: diceValue
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: checkDistance
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -182,7 +190,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Name
-      value: Dice Side (3)
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Layer
@@ -190,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.y
@@ -236,6 +244,10 @@ PrefabInstance:
       propertyPath: diceValue
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: checkDistance
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -264,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Name
-      value: Dice Side (1)
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Layer
@@ -280,7 +292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -318,6 +330,10 @@ PrefabInstance:
       propertyPath: diceValue
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: checkDistance
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6559522129856131015, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -350,7 +366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Name
-      value: Dice Side
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Layer
@@ -370,7 +386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -404,6 +420,10 @@ PrefabInstance:
       propertyPath: dice
       value: 
       objectReference: {fileID: 3221087378822553419}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: checkDistance
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6559522129856131015, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -486,19 +506,19 @@ PrefabInstance:
       addedObject: {fileID: 1725375433245575496}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d400ad96dc116647b0dfeba5b490335, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 34311715624184493}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d400ad96dc116647b0dfeba5b490335, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2333728836417166533}
+      addedObject: {fileID: 8733383255087438942}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d400ad96dc116647b0dfeba5b490335, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4270376061270410538}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d400ad96dc116647b0dfeba5b490335, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 2333728836417166533}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d400ad96dc116647b0dfeba5b490335, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2985162078757519823}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d400ad96dc116647b0dfeba5b490335, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8733383255087438942}
+      addedObject: {fileID: 34311715624184493}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8d400ad96dc116647b0dfeba5b490335, type: 3}
       insertIndex: -1
@@ -604,7 +624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Name
-      value: Dice Side (5)
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2266136242900112864, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_Layer
@@ -616,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2487967394403701332, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -657,6 +677,10 @@ PrefabInstance:
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: checkDistance
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -25,6 +25,13 @@ public class DiceManager : MonoBehaviour
 
     float waitTime;
 
+    [Header("Dice Properties")]
+    [SerializeField] int bonus1Score;
+    [SerializeField] int bonusOddsScore;
+    [SerializeField] int bonusEvensScore;
+    [SerializeField] float nearBonusRadius;
+    [SerializeField] LayerMask diceLayer;
+
     /// <summary>
     /// The dice score rolled that round
     /// </summary>
@@ -75,21 +82,21 @@ public class DiceManager : MonoBehaviour
     /// </summary>
     /// <param name="score"></param>
 
-    public void ReportScore(int score, SideProperties side)
+    public void ReportScore(int score, SideProperties side, Dice dice)
     {
         if (!isRolling)
         {
             return;
         }
         diceCount++;
-        CalculateScore(score, side);
+        CalculateScore(score, side, dice);
         
     }
     /// <summary>
     /// Calculate the score, add to the score counter. If all dice are rolled, add to the round score
     /// and stop rolling logic
     /// </summary>
-    void CalculateScore(int score, SideProperties side)
+    void CalculateScore(int score, SideProperties side, Dice dice)
     {
         collectedDiceScores.Add(score);
         switch (side)
@@ -101,7 +108,7 @@ public class DiceManager : MonoBehaviour
                     {
                         if (collectedScore == 1)
                         {
-                            sum += UpgradeShop.BONUS1SCORE;
+                            sum += bonus1Score;
                         }
                     }
                     collectedDiceScores.Add(sum);
@@ -115,7 +122,7 @@ public class DiceManager : MonoBehaviour
                     {
                         if ((collectedScore % 2) == 1)
                         {
-                            sum += UpgradeShop.BONUSODDSCORE;
+                            sum += bonusOddsScore;
                         }
                     }
                     collectedDiceScores.Add(sum);
@@ -129,7 +136,7 @@ public class DiceManager : MonoBehaviour
                     {
                         if ((collectedScore % 2) == 0)
                         {
-                            sum += UpgradeShop.BONUSEVENSSCORE;
+                            sum += bonusEvensScore;
                         }
                     }
                     collectedDiceScores.Add(sum);
@@ -150,6 +157,15 @@ public class DiceManager : MonoBehaviour
             case SideProperties.ReRoll:
                 GameManager.Instance.SetRollsLeft(GameManager.Instance.rollsLeft + 1);
                 break;
+
+            case SideProperties.NearBonus:
+                {
+                    Collider[] hitColliders = Physics.OverlapSphere(dice.transform.position,
+                        nearBonusRadius, diceLayer, QueryTriggerInteraction.Ignore);
+                    collectedDiceScores[collectedDiceScores.Count - 1]
+                        += score * (hitColliders.Length - 1);
+                    break;
+                }
         }
         if (diceCount >= diceList.Count)
         {

@@ -34,7 +34,7 @@ public class DiceSide : MonoBehaviour
             Debug.Log("Checking");
             if (Physics.Raycast(transform.position, transform.forward, checkDistance, groundLayer))
             {
-                DiceManager.Instance.ReportScore(diceValue, sideProperty);
+                DiceManager.Instance.ReportScore(diceValue, sideProperty, dice);
                 dice.isRolling = false;
             }
         }

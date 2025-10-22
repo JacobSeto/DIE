@@ -6,14 +6,10 @@ using UnityEngine;
 /// </summary>
 public class UpgradeShop : MonoBehaviour
 {
-    public static int BONUS1SCORE = 10;
-    public static int BONUSODDSCORE = 3;
-    public static int BONUSEVENSSCORE = 3;
-    public static int MULTIPLY2AMOUNT = 2;
 
     [SerializeField] GameObject shopUI;
-    [Tooltip("All possible upgrades that can appear in the shop")]
-    [SerializeField] List<GameObject> Upgrades = new List<GameObject>();
+    [SerializeField] Transform UpgradeContainer;
+    List<GameObject> UpgradeButtons = new List<GameObject>();
     [Tooltip("The number of upgrades that are revealed in a shop")]
     [SerializeField] int numUpgrades;
 
@@ -23,18 +19,27 @@ public class UpgradeShop : MonoBehaviour
     [SerializeField] Dice oddEvenCoinPrefab;
     [SerializeField] Dice onesCoinPrefab;
     [SerializeField] Dice sillyDiePrefab;
+    [SerializeField] Dice nearbyDiePrefab;
+
+    private void Start()
+    {
+        for (int i = 0; i < UpgradeContainer.childCount; i++)
+        {
+            UpgradeButtons.Add(UpgradeContainer.GetChild(i).gameObject);
+        }
+    }
 
     /// <summary>
     /// Randomly chooses a number of upgrades to reveal in the shop
     /// </summary>
     public void RandomizeUpgrades()
     {
-        foreach(GameObject upgrade in Upgrades)
+        foreach(GameObject button in UpgradeButtons)
         {
-            upgrade.SetActive(false);
+            button.SetActive(false);
         }
         List<GameObject> temp = new List<GameObject>();
-        temp.AddRange(Upgrades);
+        temp.AddRange(UpgradeButtons);
         for(int i = 0; i < numUpgrades; i++)
         {
             int ranIndex = Random.Range(0, temp.Count);
@@ -104,5 +109,13 @@ public class UpgradeShop : MonoBehaviour
     public void AddSillyDie()
     {
         DiceManager.Instance.AddDice(sillyDiePrefab);
+    }
+
+    /// <summary>
+    /// Adds a nearby die coin that scales its roll value based on nearby dice
+    /// </summary>
+    public void AddNearbyDie()
+    {
+        DiceManager.Instance.AddDice(nearbyDiePrefab);
     }
 }

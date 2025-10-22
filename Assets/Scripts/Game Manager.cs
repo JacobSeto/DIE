@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("The player score")]
     public int score;
-    [Space(200)]
+    [Space(40)]
     [SerializeField] TMP_Text scoreText;
 
     [Tooltip("Counts up the score added from that round")]
