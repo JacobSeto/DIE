@@ -83,29 +83,30 @@ public class DiceManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// Report score and property unless not rolling
+    /// Report value and property unless not rolling
     /// </summary>
-    /// <param name="score"></param>
+    /// <param name="value"></param>
 
-    public void ReportScore(int score, SideProperties side, Dice dice)
+    public void ReportScore(int value, SideProperties side, Dice dice)
     {
         if (!reportScores)
         {
             return;
         }
         diceCount++;
-        CalculateScore(score, side, dice);
+        CalculateScore(value, side, dice);
         
     }
     /// <summary>
-    /// Calculate the score, add to the score counter. If all dice are rolled, add to the round score
+    /// Calculate the score of the roll. If all dice are rolled, add to the round score
     /// and stop rolling logic
     /// </summary>
-    void CalculateScore(int score, SideProperties side, Dice dice)
+    void CalculateScore(int value, SideProperties side, Dice dice)
     {
         switch (side)
         {
             case SideProperties.None:
+                CreateRollDisplay(dice, value);
                 break;
             case SideProperties.Bonus1:
                 {
@@ -118,6 +119,7 @@ public class DiceManager : MonoBehaviour
                         }
                     }
                     collectedDiceScores.Add(sum);
+                    CreateRollDisplay(dice, value);
                     break;
                 }
 
@@ -132,6 +134,7 @@ public class DiceManager : MonoBehaviour
                         }
                     }
                     collectedDiceScores.Add(sum);
+                    CreateRollDisplay(dice, value);
                     break;
                 }
 
@@ -146,17 +149,19 @@ public class DiceManager : MonoBehaviour
                         }
                     }
                     collectedDiceScores.Add(sum);
+                    CreateRollDisplay(dice, value);
                     break;
                 }
 
-            case SideProperties.Multiply2:
+            case SideProperties.Multiply:
                 {
                     int sum = 0;
                     foreach (int collectedScore in collectedDiceScores)
                     {
                         sum += collectedScore;
                     }
-                    collectedDiceScores.Add(sum);
+                    collectedDiceScores.Add(sum * (value-1));
+                    CreateRollDisplay(dice, "X" + value.ToString());
                     break;
                 }
 
@@ -169,12 +174,12 @@ public class DiceManager : MonoBehaviour
                 {
                     Collider[] hitColliders = Physics.OverlapSphere(dice.transform.position,
                         nearBonusRadius, diceLayer, QueryTriggerInteraction.Ignore);
-                    score = score * (hitColliders.Length - 1);
+                    value = value * hitColliders.Length;
+                    CreateRollDisplay(dice, value);
                     break;
                 }
         }
-        collectedDiceScores.Add(score);
-        CreateRollDisplay(dice, score);
+        collectedDiceScores.Add(value);
 
         if (diceCount >= diceList.Count)
         {

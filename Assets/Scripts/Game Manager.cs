@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Score that doubles the text size")]
     [SerializeField] float scoreCounterScale;
+    [SerializeField] float maxScoreScale;
 
     [Tooltip("The player debt for the round")]
     [HideInInspector] public int debt;
@@ -60,7 +61,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         shop.AddD6();
-        shop.AddNearbyDie();
         SetScore(score);
         StartRound();
     }
@@ -126,14 +126,14 @@ public class GameManager : MonoBehaviour
     public void AddRoundScore()
     {
         SetScore(score += scoreCounter);
-        SetRoll(true);
         scoreCounterText.transform.localScale = Vector3.one;
         scoreCounterText.gameObject.SetActive(false);
         scoreCounter = 0;
         if (rollsLeft <= 0)
         {
             SetScore(score - debt);
-            if(score < 0)
+            SetRoll(false);
+            if (score < 0)
             {
                 LoseGame();
             }
@@ -141,6 +141,10 @@ public class GameManager : MonoBehaviour
             {
                 shop.OpenShop();
             }
+        }
+        else
+        {
+            SetRoll(true);
         }
     }
     /// <summary>
@@ -171,7 +175,8 @@ public class GameManager : MonoBehaviour
         scoreCounterText.gameObject.SetActive(true);
         scoreCounter += score;
         scoreCounterText.text = "+" + scoreCounter.ToString();
-        scoreCounterText.transform.localScale = new Vector3(1 + scoreCounter / scoreCounterScale, 1 + scoreCounter / scoreCounterScale, 0);    
+        float scale = Mathf.Min(1 + scoreCounter / scoreCounterScale, maxScoreScale);
+        scoreCounterText.transform.localScale = new Vector3(scale, scale, 0);
     }
 
     public void ResetGame()

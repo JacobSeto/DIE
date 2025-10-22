@@ -80,7 +80,7 @@ public class UpgradeShop : MonoBehaviour
         DiceManager.Instance.AddDice(coinPrefab);
     }
     /// <summary>
-    /// Adds a coin that doubles the score
+    /// Adds a coin that doubles the score or lose all previous score
     /// </summary>
     public void AddDoubleCoin()
     {

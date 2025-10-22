@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 6312424491188711154}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: sideProperty
@@ -363,7 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6931578711086003373, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_text
-      value: -2
+      value: X0
       objectReference: {fileID: 0}
     - target: {fileID: 6931578711086003373, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_fontSize
@@ -591,11 +591,11 @@ PrefabInstance:
       objectReference: {fileID: 6312424491188711154}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: sideProperty
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

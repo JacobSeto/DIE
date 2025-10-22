@@ -7,7 +7,7 @@ public enum SideProperties
     Bonus1,
     BonusOdds,
     BonusEvens,
-    Multiply2,
+    Multiply,
     ReRoll,
     NearBonus
 }
