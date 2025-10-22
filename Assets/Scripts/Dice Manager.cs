@@ -14,7 +14,8 @@ public class DiceManager : MonoBehaviour
     [SerializeField] Transform diceContainer;
 
     int diceCount;
-    bool isRolling;
+    public bool canRoll;
+    bool reportScores;
 
     [SerializeField] float scoreCalcWaitTime;
     [Tooltip("subtract this time to wait time to speed up calculation")]
@@ -22,6 +23,10 @@ public class DiceManager : MonoBehaviour
     [Tooltip("The fastest the score can be calculated")]
     [SerializeField] float minScoreCalcWaitTime;
     [SerializeField] float FinalWaitTime;
+
+    [SerializeField] RollDisplay scoreDisplayPrefab;
+    [Tooltip("Add y height to line up above a dice")]
+    [SerializeField] float scoreDisplayHeightOffset;
 
     float waitTime;
 
@@ -63,12 +68,12 @@ public class DiceManager : MonoBehaviour
     /// </summary>
     public void RollDice()
     {
-        if (isRolling)
+        if (!canRoll)
         {
             return;
         }
-        isRolling = true;
-        GameManager.Instance.SetRollButton(false);
+        reportScores = true;
+        GameManager.Instance.SetRoll(false);
         diceCount = 0;
         collectedDiceScores.Clear();
         GameManager.Instance.SetRollsLeft(GameManager.Instance.rollsLeft - 1);
@@ -84,7 +89,7 @@ public class DiceManager : MonoBehaviour
 
     public void ReportScore(int score, SideProperties side, Dice dice)
     {
-        if (!isRolling)
+        if (!reportScores)
         {
             return;
         }
@@ -98,9 +103,10 @@ public class DiceManager : MonoBehaviour
     /// </summary>
     void CalculateScore(int score, SideProperties side, Dice dice)
     {
-        collectedDiceScores.Add(score);
         switch (side)
         {
+            case SideProperties.None:
+                break;
             case SideProperties.Bonus1:
                 {
                     int sum = 0;
@@ -156,21 +162,48 @@ public class DiceManager : MonoBehaviour
 
             case SideProperties.ReRoll:
                 GameManager.Instance.SetRollsLeft(GameManager.Instance.rollsLeft + 1);
+                CreateRollDisplay(dice, "REROLL");
                 break;
 
             case SideProperties.NearBonus:
                 {
                     Collider[] hitColliders = Physics.OverlapSphere(dice.transform.position,
                         nearBonusRadius, diceLayer, QueryTriggerInteraction.Ignore);
-                    collectedDiceScores[collectedDiceScores.Count - 1]
-                        += score * (hitColliders.Length - 1);
+                    score = score * (hitColliders.Length - 1);
                     break;
                 }
         }
+        collectedDiceScores.Add(score);
+        CreateRollDisplay(dice, score);
+
         if (diceCount >= diceList.Count)
         {
+            reportScores = false;
             StartCoroutine(ReportScoreRound());
         }
+    }
+
+    /// <summary>
+    /// Creates a score display above a given dice
+    /// </summary>
+    /// <param name="dice">The dice to place the score above</param>
+    /// <param name="specialText">The reported score</param>
+    void CreateRollDisplay(Dice dice,string specialText)
+    {
+        RollDisplay scoreDisplay = Instantiate(scoreDisplayPrefab, dice.transform.position
+            + new Vector3(0, scoreDisplayHeightOffset, 0), Quaternion.identity);
+        scoreDisplay.SetSpecialDisplay(specialText);
+    }
+    /// <summary>
+    /// Creates a special display above a given dice
+    /// </summary>
+    /// <param name="dice">The dice to place the score above</param>
+    /// <param name="score">The reported score</param>
+    void CreateRollDisplay(Dice dice, int score)
+    {
+        RollDisplay scoreDisplay = Instantiate(scoreDisplayPrefab, dice.transform.position
+            + new Vector3(0, scoreDisplayHeightOffset, 0), Quaternion.identity);
+        scoreDisplay.SetScoreDisplay(score);
     }
     /// <summary>
     /// Reports the score round by going through all the calculated scores and adding them to the score
@@ -178,7 +211,6 @@ public class DiceManager : MonoBehaviour
     /// </summary>
     IEnumerator ReportScoreRound()
     {
-        isRolling = false;
         waitTime = scoreCalcWaitTime;
         foreach (int score in collectedDiceScores)
         {
@@ -189,7 +221,6 @@ public class DiceManager : MonoBehaviour
                 waitTime = Mathf.Max(minScoreCalcWaitTime, waitTime - scoreCalcSpeedBonus);
             }
         }
-
         yield return new WaitForSeconds(FinalWaitTime);
         GameManager.Instance.AddRoundScore();
     }

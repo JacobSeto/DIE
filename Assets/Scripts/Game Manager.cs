@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         shop.AddD6();
+        shop.AddNearbyDie();
         SetScore(score);
         StartRound();
     }
@@ -70,8 +71,22 @@ public class GameManager : MonoBehaviour
     {
         shop.HideShop();
         scoreCounterText.gameObject.SetActive(false);
+        SetRoll(true);
         round++;
-        if(round % debtBonusIncreaseIntervals == 0)
+        IncreaseDebt();
+
+        rollsLeft = numRolls;
+        SetDebt(debt);
+        SetRound(round);
+        SetRollsLeft(rollsLeft);
+    }
+    /// <summary>
+    /// Increase the debt by checking how many debtInvervals has passed and apply the debtBonusMultiplier.
+    /// Then add bonus debt to the debt round increase, and then add that to the debt
+    /// </summary>
+    void IncreaseDebt()
+    {
+        if (round % debtBonusIncreaseIntervals == 0)
         {
             bonusIncrease = Mathf.RoundToInt(debtBonusIncrease * (debtBonusMultiplier * intervalCounter));
             intervalCounter++;
@@ -79,11 +94,6 @@ public class GameManager : MonoBehaviour
         }
         debtRoundIncrease += bonusDebt;
         debt += debtRoundIncrease;
-
-        rollsLeft = numRolls;
-        SetDebt(debt);
-        SetRound(round);
-        SetRollsLeft(rollsLeft);
     }
 
     public void SetScore(int score)
@@ -116,7 +126,7 @@ public class GameManager : MonoBehaviour
     public void AddRoundScore()
     {
         SetScore(score += scoreCounter);
-        SetRollButton(true);
+        SetRoll(true);
         scoreCounterText.transform.localScale = Vector3.one;
         scoreCounterText.gameObject.SetActive(false);
         scoreCounter = 0;
@@ -134,17 +144,20 @@ public class GameManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// Sets the roll button component's active component state
+    /// Sets the roll button component's active component state and determines if the player
+    /// can roll their dice
     /// </summary>
     /// <param name="toggle"></param>
-    public void SetRollButton(bool toggle)
+    public void SetRoll(bool toggle)
     {
         rollButton.enabled = toggle;
+        DiceManager.Instance.canRoll = toggle;
     }
 
     void LoseGame()
     {
         loseScreen.SetActive(true);
+        SetRoll(false);
         PlayerPrefs.SetInt("Highest Round", Mathf.Max(PlayerPrefs.GetInt("Highest Round", 0), round));
         int highestRound = PlayerPrefs.GetInt("Highest Round", 0);
         loseStats.text = "Highest Round: " + highestRound.ToString();
