@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int round;
     [SerializeField] TMP_Text roundText;
 
-    [Tooltip("Number of rolls given before a round ends")]
+    [Tooltip("Max number of rolls given before a round ends")]
     public int numRolls;
     [HideInInspector] public int rollsLeft;
     [SerializeField] TMP_Text rollsLeftText;
@@ -113,11 +113,14 @@ public class GameManager : MonoBehaviour
         this.round = round;
         roundText.text = "Round: " + round.ToString();  
     }
-
+    /// <summary>
+    /// Set rolls left, with numRolls being the max rolls
+    /// </summary>
+    /// <param name="rollsLeft"></param>
     public void SetRollsLeft(int rollsLeft)
     {
-        this.rollsLeft = rollsLeft;
-        rollsLeftText.text = "Rolls: " + rollsLeft.ToString();
+        this.rollsLeft = Mathf.Min(numRolls, rollsLeft);
+        rollsLeftText.text = "Rolls: " + rollsLeft.ToString() + '/' + numRolls.ToString();
     }
 
     /// <summary>

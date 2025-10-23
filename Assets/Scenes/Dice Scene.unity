@@ -3043,7 +3043,8 @@ PrefabInstance:
 
         1-5: Subtract that roll value
 
-        6: Reroll'
+        6: +1 Round
+        Roll'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4306,7 +4307,7 @@ PrefabInstance:
         Heads: Double all previous rolls
 
         Tails:
-        -2'
+        Lose all previous scored rolls'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
