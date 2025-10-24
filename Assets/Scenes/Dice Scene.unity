@@ -1891,7 +1891,7 @@ MonoBehaviour:
   UpgradeContainer: {fileID: 419736576}
   numUpgrades: 3
   coinPrefab: {fileID: 6312424491188711154, guid: 40a235251d63d604780742ef6870a52c, type: 3}
-  d6Prefab: {fileID: 3221087378822553419, guid: 6bdbb34c994bbe84f9fb201dade4c99e, type: 3}
+  d6Prefab: {fileID: 1530237889799366727, guid: 6bdbb34c994bbe84f9fb201dade4c99e, type: 3}
   d8Prefab: {fileID: 4589857658203092762, guid: 294f35ea5146c6144824515bdb1a6050, type: 3}
   doublerPrefab: {fileID: 6312424491188711154, guid: d4c20ac3bc1f65d4f82cca5a955dbc31, type: 3}
   oddEvenPrefab: {fileID: 6312424491188711154, guid: af0b7cc89f90e474ea95b988736dbadc, type: 3}

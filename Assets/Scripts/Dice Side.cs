@@ -10,16 +10,17 @@ public class DiceSide : MonoBehaviour
     [SerializeField] float value;
     [Tooltip("Dice side properties")]
     [SerializeField] SideProperties sideProperty;
-    [SerializeField] Dice dice;
 
     [SerializeField] LayerMask groundLayer;
     [Tooltip("The velocity threshold to be considered no longer moving")]
     [SerializeField] float reportVelocity;
     [SerializeField] float checkDistance;
     Rigidbody rb;
+    Dice dice;
 
     private void Start()
     {
+        dice = GetComponentInParent<Dice>();
         rb = GetComponentInParent<Rigidbody>();
     }
 
