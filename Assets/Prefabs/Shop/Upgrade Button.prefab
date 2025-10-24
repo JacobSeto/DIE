@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 2313519363097358202}
   - component: {fileID: 7947503345259067424}
   m_Layer: 0
-  m_Name: Upgrade Title (1)
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +181,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -65}
-  m_SizeDelta: {x: 0, y: -130}
+  m_SizeDelta: {x: -30, y: -130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2313519363097358202
 CanvasRenderer:
@@ -239,15 +239,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
+  m_fontSize: 42.55
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 45
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 4780749723212099423}
   - component: {fileID: 1928677538339213691}
   m_Layer: 0
-  m_Name: Upgrade Title
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

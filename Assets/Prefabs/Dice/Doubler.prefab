@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3021534759123239586}
   - component: {fileID: 1043074975554800266}
   m_Layer: 6
-  m_Name: Odds or Even Coin
+  m_Name: Doubler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,12 +225,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6312424491188711154}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: value
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: sideProperty
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -266,8 +270,24 @@ PrefabInstance:
       value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 3646722244766987730, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646722244766987730, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646722244766987730, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3646722244766987730, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892346939320412160, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6840077185094445696, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_Pivot.x
@@ -351,7 +371,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6931578711086003373, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_text
-      value: E
+      value: X.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931578711086003373, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
+      propertyPath: m_fontSize
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6931578711086003373, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8097644545539569515, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_Layer
@@ -398,6 +426,10 @@ PrefabInstance:
     - target: {fileID: 3646722244766987730, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5892346939320412160, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6840077185094445696, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_Pivot.x
@@ -481,7 +513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6931578711086003373, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_text
-      value: O
+      value: X2
       objectReference: {fileID: 0}
     - target: {fileID: 6931578711086003373, guid: 49de8e368c22f594b86a6bb24fb6253b, type: 3}
       propertyPath: m_fontSize
@@ -570,12 +602,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6312424491188711154}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: sideProperty
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

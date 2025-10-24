@@ -13,11 +13,12 @@ public class UpgradeShop : MonoBehaviour
     [Tooltip("The number of upgrades that are revealed in a shop")]
     [SerializeField] int numUpgrades;
 
-    [SerializeField] Dice d6Prefab;
     [SerializeField] Dice coinPrefab;
-    [SerializeField] Dice doubleCoinPrefab;
-    [SerializeField] Dice oddEvenCoinPrefab;
-    [SerializeField] Dice onesCoinPrefab;
+    [SerializeField] Dice d6Prefab;
+    [SerializeField] Dice d8Prefab;
+    [SerializeField] Dice doublerPrefab;
+    [SerializeField] Dice oddEvenPrefab;
+    [SerializeField] Dice onesPrefab;
     [SerializeField] Dice sillyDiePrefab;
     [SerializeField] Dice nearbyDiePrefab;
 
@@ -65,6 +66,14 @@ public class UpgradeShop : MonoBehaviour
     }
 
     /// <summary>
+    /// Adds a coin
+    /// </summary>
+    public void AddCoin()
+    {
+        DiceManager.Instance.AddDice(coinPrefab);
+    }
+
+    /// <summary>
     /// Adds a D6
     /// </summary>
     public void AddD6()
@@ -72,19 +81,17 @@ public class UpgradeShop : MonoBehaviour
         DiceManager.Instance.AddDice(d6Prefab);
     }
 
-    /// <summary>
-    /// Adds a coin
-    /// </summary>
-    public void AddCoin()
+    public void AddD8()
     {
-        DiceManager.Instance.AddDice(coinPrefab);
+        DiceManager.Instance.AddDice(d8Prefab);
     }
+
     /// <summary>
-    /// Adds a coin that doubles the score or lose all previous score
+    /// Adds a coin that doubles the score or loses score
     /// </summary>
-    public void AddDoubleCoin()
+    public void AddDoubler()
     {
-        DiceManager.Instance.AddDice(doubleCoinPrefab);
+        DiceManager.Instance.AddDice(doublerPrefab);
     }
 
     /// <summary>
@@ -92,7 +99,7 @@ public class UpgradeShop : MonoBehaviour
     /// </summary>
     public void AddOddEvenCoin()
     {
-        DiceManager.Instance.AddDice(oddEvenCoinPrefab);
+        DiceManager.Instance.AddDice(oddEvenPrefab);
     }
 
     /// <summary>
@@ -100,7 +107,7 @@ public class UpgradeShop : MonoBehaviour
     /// </summary>
     public void AddOnesCoin()
     {
-        DiceManager.Instance.AddDice(onesCoinPrefab);
+        DiceManager.Instance.AddDice(onesPrefab);
     }
 
     /// <summary>

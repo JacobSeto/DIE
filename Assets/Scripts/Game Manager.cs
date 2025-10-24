@@ -9,17 +9,16 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("The player score")]
     public int score;
-    [Space(40)]
+    [Space(20)]
     [SerializeField] TMP_Text scoreText;
-
     [Tooltip("Counts up the score added from that round")]
     [HideInInspector] int scoreCounter;
     [SerializeField] TMP_Text scoreCounterText;
-
     [Tooltip("Score that doubles the text size")]
     [SerializeField] float scoreCounterScale;
     [SerializeField] float maxScoreScale;
 
+    [Header("Round")]
     [Tooltip("The player debt for the round")]
     [HideInInspector] public int debt;
     [SerializeField] TMP_Text debtText;
@@ -36,20 +35,23 @@ public class GameManager : MonoBehaviour
     int bonusIncrease = 0;
     int intervalCounter = 0;
 
-    [Tooltip("The round number")]
+    [Tooltip("Round")]
     [HideInInspector] public int round;
     [SerializeField] TMP_Text roundText;
-
-    [Tooltip("Max number of rolls given before a round ends")]
+    [Tooltip("rolls given per round")]
     public int numRolls;
+    [SerializeField] int maxRollsPerRound;
+    [Tooltip("Decreases each roll to prevent infinite rolling")]
+    [HideInInspector] public int maxRollsLeft;
     [HideInInspector] public int rollsLeft;
     [SerializeField] TMP_Text rollsLeftText;
+    bool canRoll;
+
+    [Header("Game UI")]
 
     [SerializeField] GameObject loseScreen;
     [SerializeField] TMP_Text loseStats;
-
     [SerializeField] UpgradeShop shop;
-
     [SerializeField] Button rollButton;
 
 
@@ -60,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        shop.AddD6();
+        shop.AddD8();
         SetScore(score);
         StartRound();
     }
@@ -74,11 +76,24 @@ public class GameManager : MonoBehaviour
         SetRoll(true);
         round++;
         IncreaseDebt();
-
-        rollsLeft = numRolls;
         SetDebt(debt);
         SetRound(round);
-        SetRollsLeft(rollsLeft);
+        maxRollsLeft = maxRollsPerRound;
+        SetRollsLeft(numRolls);
+    }
+    /// <summary>
+    /// Attempts to roll if the player hasn't rolled yet. Reduces the max rolls by 1 and
+    /// tells the <see cref="DiceManager"/> to roll all Dice
+    /// </summary>
+    public void OnRoll()
+    {
+        if (canRoll)
+        {
+            SetRoll(false);
+            maxRollsLeft--;
+            SetRollsLeft(rollsLeft - 1);
+            DiceManager.Instance.RollDice();
+        }
     }
     /// <summary>
     /// Increase the debt by checking how many debtInvervals has passed and apply the debtBonusMultiplier.
@@ -119,8 +134,8 @@ public class GameManager : MonoBehaviour
     /// <param name="rollsLeft"></param>
     public void SetRollsLeft(int rollsLeft)
     {
-        this.rollsLeft = Mathf.Min(numRolls, rollsLeft);
-        rollsLeftText.text = "Rolls: " + rollsLeft.ToString() + '/' + numRolls.ToString();
+        this.rollsLeft = Mathf.Min(maxRollsLeft, rollsLeft);
+        rollsLeftText.text = "Rolls: " + rollsLeft.ToString() + '/' + maxRollsLeft.ToString();
     }
 
     /// <summary>
@@ -151,14 +166,13 @@ public class GameManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// Sets the roll button component's active component state and determines if the player
-    /// can roll their dice
+    /// Toggles whether or not the player can roll their dice
     /// </summary>
     /// <param name="toggle"></param>
     public void SetRoll(bool toggle)
     {
         rollButton.enabled = toggle;
-        DiceManager.Instance.canRoll = toggle;
+        canRoll = toggle;
     }
 
     void LoseGame()

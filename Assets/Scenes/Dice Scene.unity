@@ -684,7 +684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: 'Adds a coin with 2 sides.
+      value: '2-Sided Die:
 
         Heads: 5
 
@@ -973,9 +973,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1127650174}
-        m_TargetAssemblyTypeName: DiceManager, Assembly-CSharp
-        m_MethodName: RollDice
+      - m_Target: {fileID: 722845137}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnRoll
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1818,6 +1818,7 @@ GameObject:
   - component: {fileID: 722845136}
   - component: {fileID: 722845137}
   - component: {fileID: 722845138}
+  - component: {fileID: 722845139}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1866,6 +1867,8 @@ MonoBehaviour:
   round: 0
   roundText: {fileID: 1752414694}
   numRolls: 3
+  maxRollsPerRound: 10
+  maxRollsLeft: 0
   rollsLeft: 0
   rollsLeftText: {fileID: 1968932198}
   loseScreen: {fileID: 475377616}
@@ -1887,13 +1890,44 @@ MonoBehaviour:
   shopUI: {fileID: 577242576}
   UpgradeContainer: {fileID: 419736576}
   numUpgrades: 3
-  d6Prefab: {fileID: 3221087378822553419, guid: 6bdbb34c994bbe84f9fb201dade4c99e, type: 3}
   coinPrefab: {fileID: 6312424491188711154, guid: 40a235251d63d604780742ef6870a52c, type: 3}
-  doubleCoinPrefab: {fileID: 6312424491188711154, guid: d4c20ac3bc1f65d4f82cca5a955dbc31, type: 3}
-  oddEvenCoinPrefab: {fileID: 6312424491188711154, guid: af0b7cc89f90e474ea95b988736dbadc, type: 3}
-  onesCoinPrefab: {fileID: 6312424491188711154, guid: 8df305cf26bc30d45b4d15cdf4464b27, type: 3}
-  sillyDiePrefab: {fileID: 3221087378822553419, guid: 72a6b3995778f544487e9d20c3344160, type: 3}
+  d6Prefab: {fileID: 3221087378822553419, guid: 6bdbb34c994bbe84f9fb201dade4c99e, type: 3}
+  d8Prefab: {fileID: 4589857658203092762, guid: 294f35ea5146c6144824515bdb1a6050, type: 3}
+  doublerPrefab: {fileID: 6312424491188711154, guid: d4c20ac3bc1f65d4f82cca5a955dbc31, type: 3}
+  oddEvenPrefab: {fileID: 6312424491188711154, guid: af0b7cc89f90e474ea95b988736dbadc, type: 3}
+  onesPrefab: {fileID: 6312424491188711154, guid: 8df305cf26bc30d45b4d15cdf4464b27, type: 3}
+  sillyDiePrefab: {fileID: 4589857658203092762, guid: a8f9a81fb1e93544fa339d177373b0f1, type: 3}
   nearbyDiePrefab: {fileID: 9216680520800001077, guid: 0bf9581c0424a06478288770ce2dcf24, type: 3}
+--- !u!114 &722845139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722845135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &766803039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,7 +2700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 874128648615217313, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 900565640426863352, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2794,7 +2828,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: D4 that scales its roll value based on the number of nearby dice
+      value: '4-Sided Die:
+
+        1-4: Score the number of dice near this one (including
+        itself) multiplied by the rolled value'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
+      propertyPath: m_fontSize
+      value: 39.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2816,7 +2857,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1127650175}
   - component: {fileID: 1127650174}
-  - component: {fileID: 1127650176}
   m_Layer: 0
   m_Name: Dice Manager
   m_TagString: Untagged
@@ -2837,7 +2877,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiceManager
   diceContainer: {fileID: 1509500706}
-  canRoll: 0
   scoreCalcWaitTime: 0.4
   scoreCalcSpeedBonus: 0.02
   minScoreCalcWaitTime: 0.05
@@ -2847,7 +2886,7 @@ MonoBehaviour:
   bonus1Score: 10
   bonusOddsScore: 3
   bonusEvensScore: 3
-  nearBonusRadius: 2.25
+  nearBonusRadius: 1.75
   diceLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2867,36 +2906,6 @@ Transform:
   - {fileID: 1509500706}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1127650176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127650173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: 
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1001 &1134739085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3039,12 +3048,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: 'D6 with:
+      value: '8-Sided Die:
 
-        1-5: Subtract that roll value
+        1: +1 Round Roll
 
-        6: +1 Round
-        Roll'
+        2-8: Subtract that
+        roll value from your score'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
+      propertyPath: m_fontSize
+      value: 40.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3290,7 +3303,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -3866,7 +3879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: 'Coin with 2 sides:
+      value: '2-Sided Die:
 
         Heads: +10 for each 1 previously rolled
 
@@ -4170,7 +4183,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 874128648615217313, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_Name
-      value: Double or Nothing
+      value: Doubler
       objectReference: {fileID: 0}
     - target: {fileID: 874128648615217313, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_IsActive
@@ -4186,7 +4199,7 @@ PrefabInstance:
       objectReference: {fileID: 722845137}
     - target: {fileID: 900565640426863352, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AddDoubleCoin
+      value: AddDoubler
       objectReference: {fileID: 0}
     - target: {fileID: 900565640426863352, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -4210,7 +4223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1928677538339213691, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: Double or Nothing
+      value: Doubler
       objectReference: {fileID: 0}
     - target: {fileID: 1928677538339213691, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_fontSize
@@ -4302,12 +4315,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: 'Coin with 2 sides:
+      value: '2 Sided Die:
 
-        Heads: Double all previous rolls
+        Heads: Double roll score
 
-        Tails:
-        Lose all previous scored rolls'
+        Tails: Half
+        roll score'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5071,12 +5084,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: 'Coin with 2 sides:
+      value: '2-Sided Die:
 
-        Heads: +3 for each previous even roll
+        Heads: +3 for each settled die that was even
 
         Tails:
-        +3 for each previous odd roll'
+        +3 for each settled die that was odd'
       objectReference: {fileID: 0}
     - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_fontSize
@@ -5148,7 +5161,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Rolls: 999'
+  m_text: 'Rolls: 10/10'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5182,7 +5195,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5308,7 +5321,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -5409,7 +5422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1928677538339213691, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: D6
+      value: Classic
       objectReference: {fileID: 0}
     - target: {fileID: 2379634909928548117, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_Pivot.x
@@ -5493,7 +5506,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7947503345259067424, guid: e31433b3e69cbf64f907dc35b9393790, type: 3}
       propertyPath: m_text
-      value: Add another D6!
+      value: '6-Sided Die:
+
+        Score the rolled value'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

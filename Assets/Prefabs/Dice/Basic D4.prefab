@@ -144,7 +144,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064130663211564596}
   serializedVersion: 5
-  m_Mass: 1.35
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -162,7 +162,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1001 &67633847053169092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,6 +223,10 @@ PrefabInstance:
       propertyPath: dice
       value: 
       objectReference: {fileID: 9216680520800001077}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
       value: 1
@@ -302,6 +306,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9216680520800001077}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
       value: 3
       objectReference: {fileID: 0}
@@ -380,6 +388,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9216680520800001077}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: value
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
       value: 4
       objectReference: {fileID: 0}
@@ -457,6 +469,10 @@ PrefabInstance:
       propertyPath: dice
       value: 
       objectReference: {fileID: 9216680520800001077}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: value
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
       value: 2

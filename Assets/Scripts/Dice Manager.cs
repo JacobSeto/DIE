@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
-
+/// <summary>
+/// Controls the logic of all dice in the game
+/// </summary>
 public class DiceManager : MonoBehaviour
 {
     public static DiceManager Instance;
@@ -14,7 +16,6 @@ public class DiceManager : MonoBehaviour
     [SerializeField] Transform diceContainer;
 
     int diceCount;
-    public bool canRoll;
     bool reportScores;
 
     [SerializeField] float scoreCalcWaitTime;
@@ -58,128 +59,147 @@ public class DiceManager : MonoBehaviour
         diceList.Add(newDice);
     }
 
-    public void OnRoll()
-    {
-        RollDice();
-    }
-
     /// <summary>
-    /// Rolls all dice
+    /// Rolls all dice 
     /// </summary>
     public void RollDice()
     {
-        if (!canRoll)
-        {
-            return;
-        }
         reportScores = true;
-        GameManager.Instance.SetRoll(false);
         diceCount = 0;
         collectedDiceScores.Clear();
-        GameManager.Instance.SetRollsLeft(GameManager.Instance.rollsLeft - 1);
         foreach(Dice dice in diceList)
         {
             StartCoroutine(dice.Roll());
         }
     }
-    /// <summary>
-    /// Report value and property unless not rolling
-    /// </summary>
-    /// <param name="value"></param>
 
-    public void ReportScore(int value, SideProperties side, Dice dice)
+    /// <summary>
+    /// Reports value and dice property unless not rolling
+    /// </summary>
+
+    public void ReportScore(Dice dice, float value, SideProperties side)
     {
         if (!reportScores)
         {
             return;
         }
         diceCount++;
-        CalculateScore(value, side, dice);
+        CalculateScore(dice, value, side);
         
     }
+
+    /// <summary>
+    /// Gives a bonus for each 1 scored
+    /// </summary>
+    void Bonus1(Dice dice, int score)
+    {
+        int sum = 0;
+        foreach (int collectedScore in collectedDiceScores)
+        {
+            if (collectedScore == 1)
+            {
+                sum += bonus1Score;
+            }
+        }
+        sum += score;
+        collectedDiceScores.Add(sum);
+        CreateRollDisplay(dice, sum);
+    }
+    /// <summary>
+    /// Adds bonuses to the parity of previous rolls
+    /// </summary>
+    void Parity(Dice dice, int score, bool isOdd)
+    {
+        int sum = 0;
+        if (isOdd)
+        {
+            foreach (int collectedScore in collectedDiceScores)
+            {
+                if ((collectedScore % 2) == 1)
+                {
+                    sum += bonusOddsScore;
+                }
+            }
+        }
+        else
+        {
+            foreach (int collectedScore in collectedDiceScores)
+            {
+                if ((collectedScore % 2) == 1)
+                {
+                    sum += bonusEvensScore;
+                }
+            }
+        }
+        sum += score;
+        collectedDiceScores.Add(sum);
+        CreateRollDisplay(dice, sum);
+    }
+    /// <summary>
+    /// Score based on the multiplication of previous rolls
+    /// </summary>
+    void Multiply(Dice dice, float value)
+    {
+        float sum = 0;
+        foreach (int collectedScore in collectedDiceScores)
+        {
+            sum += collectedScore;
+        }
+        collectedDiceScores.Add((int)Mathf.Round(sum * (value - 1)));
+        CreateRollDisplay(dice, "X" + value.ToString());
+    }
+
+    /// <summary>
+    /// Grants another reroll for the round
+    /// </summary>
+    void ReRoll(Dice dice)
+    {
+        GameManager.Instance.SetRollsLeft(GameManager.Instance.rollsLeft + 1);
+        CreateRollDisplay(dice, "REROLL");
+    }
+    /// <summary>
+    /// Score that scales with the number of other dice around it
+    /// </summary>
+    void NearBonus(Dice  dice, float value)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(dice.transform.position,
+                        nearBonusRadius, diceLayer, QueryTriggerInteraction.Ignore);
+        int score = (int)Mathf.Round(value * hitColliders.Length);
+        collectedDiceScores.Add(score);
+        CreateRollDisplay(dice, score);
+    }
+
     /// <summary>
     /// Calculate the score of the roll. If all dice are rolled, add to the round score
     /// and stop rolling logic
     /// </summary>
-    void CalculateScore(int value, SideProperties side, Dice dice)
+    void CalculateScore(Dice dice, float value, SideProperties side)
     {
         switch (side)
         {
             case SideProperties.None:
-                CreateRollDisplay(dice, value);
+                collectedDiceScores.Add((int)value);
+                CreateRollDisplay(dice, (int)value);
                 break;
             case SideProperties.Bonus1:
-                {
-                    int sum = 0;
-                    foreach (int collectedScore in collectedDiceScores)
-                    {
-                        if (collectedScore == 1)
-                        {
-                            sum += bonus1Score;
-                        }
-                    }
-                    collectedDiceScores.Add(sum);
-                    CreateRollDisplay(dice, value);
-                    break;
-                }
-
-            case SideProperties.BonusOdds:
-                {
-                    int sum = 0;
-                    foreach (int collectedScore in collectedDiceScores)
-                    {
-                        if ((collectedScore % 2) == 1)
-                        {
-                            sum += bonusOddsScore;
-                        }
-                    }
-                    collectedDiceScores.Add(sum);
-                    CreateRollDisplay(dice, value);
-                    break;
-                }
-
-            case SideProperties.BonusEvens:
-                {
-                    int sum = 0;
-                    foreach (int collectedScore in collectedDiceScores)
-                    {
-                        if ((collectedScore % 2) == 0)
-                        {
-                            sum += bonusEvensScore;
-                        }
-                    }
-                    collectedDiceScores.Add(sum);
-                    CreateRollDisplay(dice, value);
-                    break;
-                }
-
-            case SideProperties.Multiply:
-                {
-                    int sum = 0;
-                    foreach (int collectedScore in collectedDiceScores)
-                    {
-                        sum += collectedScore;
-                    }
-                    collectedDiceScores.Add(sum * (value-1));
-                    CreateRollDisplay(dice, "X" + value.ToString());
-                    break;
-                }
-
-            case SideProperties.ReRoll:
-                GameManager.Instance.SetRollsLeft(GameManager.Instance.rollsLeft + 1);
-                CreateRollDisplay(dice, "REROLL");
+                Bonus1(dice, (int)value);
                 break;
-
+            case SideProperties.BonusOdds:
+                Parity(dice, (int)value, true);
+                break;
+            case SideProperties.BonusEvens:
+                Parity(dice, (int)value, false);
+                break;
+            case SideProperties.Multiply:
+                Multiply(dice, value);
+                break;
+            case SideProperties.ReRoll:
+                ReRoll(dice);
+                break;
             case SideProperties.NearBonus:
-                {
-                    Collider[] hitColliders = Physics.OverlapSphere(dice.transform.position,
-                        nearBonusRadius, diceLayer, QueryTriggerInteraction.Ignore);
-                    value = value * hitColliders.Length;
-                    CreateRollDisplay(dice, value);
-                    break;
-                }
+                NearBonus(dice, value);
+                break;
         }
-        collectedDiceScores.Add(value);
 
         if (diceCount >= diceList.Count)
         {

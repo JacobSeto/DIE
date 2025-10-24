@@ -7,7 +7,7 @@ using UnityEngine;
 public class DiceSide : MonoBehaviour
 {
     [Tooltip("Value of dice side")]
-    [SerializeField] int diceValue;
+    [SerializeField] float value;
     [Tooltip("Dice side properties")]
     [SerializeField] SideProperties sideProperty;
     [SerializeField] Dice dice;
@@ -31,10 +31,9 @@ public class DiceSide : MonoBehaviour
     {
         if (dice.isRolling && (rb.linearVelocity.magnitude + rb.angularVelocity.magnitude) < reportVelocity)
         {
-            Debug.Log("Checking");
             if (Physics.Raycast(transform.position, transform.forward, checkDistance, groundLayer))
             {
-                DiceManager.Instance.ReportScore(diceValue, sideProperty, dice);
+                DiceManager.Instance.ReportScore(dice, value, sideProperty);
                 dice.isRolling = false;
             }
         }

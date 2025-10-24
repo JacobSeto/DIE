@@ -106,10 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd22201e61b5eab409fc48351f48246d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dice
-  minTorqueStrength: 1
-  maxTorqueStrength: 2
-  minForceStrength: 1.4
-  maxForceStrength: 2.5
+  minTorqueStrength: 5
+  maxTorqueStrength: 12
+  minForceStrength: 5
+  maxForceStrength: 12
   tryAgainWaitTime: 8
   isRolling: 0
 --- !u!54 &3021534759123239586
@@ -120,7 +120,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8286361755752060275}
   serializedVersion: 5
-  m_Mass: 0.15
+  m_Mass: 2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: dice
       value: 
       objectReference: {fileID: 6312424491188711154}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
       value: 1
@@ -553,6 +557,10 @@ PrefabInstance:
       propertyPath: dice
       value: 
       objectReference: {fileID: 6312424491188711154}
+    - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
+      propertyPath: value
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5832436864186435441, guid: 0dbebd0a91f2e274daf3dc625a50e0ec, type: 3}
       propertyPath: diceValue
       value: 5
